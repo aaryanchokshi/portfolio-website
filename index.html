@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aaryan Chokshi Portfolio Website</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image" href="logo.png">
+    <!-- Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap"
         rel="stylesheet">
+    <!-- Styles -->
     <style>
         /* General Styles */
         * {
@@ -298,23 +301,61 @@
             gap: 20px;
         }
 
+        /* 3D Flipping Cards with Pop-Out Effect */
         .project-card {
             background-color: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
             overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 255, 255, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.6s, box-shadow 0.3s;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+            width: 100%;
+            height: 300px; /* Adjust height as needed */
         }
 
-        body.light-mode .project-card {
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+        .project-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        .project-card.flipped .project-card-inner {
+            transform: rotateY(180deg) scale(1.2); /* Flip and scale up */
+        }
+
+        .project-card-front,
+        .project-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .project-card-back {
+            transform: rotateY(180deg);
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            overflow-y: auto; /* Enable scrolling for long content */
+        }
+
+        .project-card-back::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .project-card-back::-webkit-scrollbar-thumb {
+            background: #00ffff;
+            border-radius: 5px;
+        }
+
+        .project-card-back::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .project-image {
@@ -577,6 +618,12 @@
     <button id="voice-command"
         style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: linear-gradient(135deg, #00ffff, #00bcd4); color: #000; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer;">🎤</button>
 
+    <!-- JARVIS Sound -->
+    <audio id="jarvis-sound" autoplay>
+        <source src="jarvis-welcome.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <header>
         <nav>
             <a href="#" class="logo">AC</a>
@@ -601,21 +648,33 @@
             <p>Welcome back, Sir. How can I assist you today?</p>
             <a href="#contact" class="btn">Get in Touch</a>
         </div>
-        <!-- 3D Background -->
-        <!-- <canvas id="threejs-background"></canvas> -->
     </section>
 
     <section id="about">
         <h2 class="section-title">About Me</h2>
         <div class="about-container">
             <div class="about-text">
-                <p>As a dedicated MS student in Computer Science at Adelphi University, I'm driven by a fascination with
-                    technology that pushes me to transform academic knowledge into practical projects. I combine my
-                    theoretical understanding with hands-on experience to continuously enhance my skills.</p>
-                <p>Beyond the classroom, I'm eager to contribute to real-world projects and bring innovative solutions
-                    to complex problems. My background in both front-end and back-end development, combined with my
-                    interest in AI applications, positions me uniquely to tackle the challenges of modern software
-                    development.</p>
+                <p>Hi, I’m Aaryan Chokshi, a goal-oriented and committed Computer Science professional currently pursuing my Master’s in Computer Science at Adelphi University, New York. With a strong foundation in software development, cybersecurity, and database management, I am passionate about leveraging technology to solve real-world challenges.</p>
+            
+                <h3>🔹 Technical Expertise</h3>
+                <li><strong>Programming Languages:</strong> Java, C, C++, Python, JavaScript, PHP</li>
+                <li><strong>Web Technologies:</strong> HTML, CSS, XML, Bootstrap, Angular</li>
+                <li><strong>Databases:</strong> MySQL, SQL, MongoDB</li>
+                <li><strong>Operating Systems:</strong> Linux (Ubuntu), Windows, macOS</li>
+                <li><strong>Tools & Frameworks:</strong> Git, React, jQuery, Microsoft Office</li>
+                
+            
+                <h3>🔹 What Drives Me?</h3>
+                <p>💡 I thrive in fast-paced, collaborative environments, where I can design, develop, and deploy scalable applications. I enjoy solving complex problems, building innovative solutions, and enhancing system security.</p>
+            
+                <h3>🔍 My Passion</h3>
+                <p>I am especially passionate about cybersecurity, ethical hacking, AI integration, and full-stack development. My projects include live tracking systems, AI-driven assistants, and secure web applications.</p>
+            
+                <h3>🔹 What’s Next?</h3>
+                <p>I am actively looking for opportunities in software engineering, cybersecurity, and cloud computing, where I can apply my skills to develop innovative and secure solutions.</p>
+            
+                <h3>🔗 Let’s Connect!</h3>
+                <p>Let’s connect and explore possibilities in technology, cybersecurity, and AI-driven development!</p>
             </div>
             <div class="about-image">
                 <img src="laptopwave.png" alt="Aaryan Chokshi Avatar">
@@ -644,31 +703,91 @@
     <section id="projects">
         <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image">🚚</div>
-                <div class="project-content">
-                    <h3>Truckive - Live Truck Tracking Application</h3>
-                    <p>Developed a cutting-edge live tracking app designed to provide real-time visibility and
-                        management of truck fleets. The app simplifies fleet management, making it easier to monitor and
-                        improve operations.</p>
+            <!-- Truckive Project -->
+            <div class="project-card" onclick="flipCard(this)">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <div class="project-image">🚚</div>
+                        <div class="project-content">
+                            <h3>Truckive - Live Truck Tracking Application</h3>
+                            <!-- <p>Developed a cutting-edge live tracking app designed to provide real-time visibility and
+                                management of truck fleets.</p> -->
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <div class="project-content">
+                            <h3>Truckive - Live Truck Tracking Application</h3>
+                            <p>May 2024 | Associated with GLS University</p>
+                            <p>Truckive is a cutting-edge live truck tracking application aimed at enhancing fleet management. It provides real-time location tracking and operational insights, allowing businesses to monitor and optimize the performance of their truck fleet.</p>
+                            <p><strong>Key Features:</strong></p>
+                            <ul>
+                                <li>Real-Time GPS Tracking</li>
+                                <li>Fleet Dashboard</li>
+                                <li>Geofencing & Alerts</li>
+                                <li>Analytics & Reporting</li>
+                            </ul>
+                            <p><strong>Technologies Used:</strong></p>
+                            <ul>
+                                <li>Frontend Development: Flutter</li>
+                                <li>Backend Development: Firebase</li>
+                                <li>Location Tracking: Google Maps API</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-image">🚗</div>
-                <div class="project-content">
-                    <h3>Car Rental System Website</h3>
-                    <p>Developed a straightforward car rental website that allows users to register, choose vehicles,
-                        make reservations, and complete payments securely. Built a MySQL database to link the PHP
-                        website with the XAMPP server.</p>
+
+            <!-- Car Rental System Project -->
+            <div class="project-card" onclick="flipCard(this)">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <div class="project-image">🚗</div>
+                        <div class="project-content">
+                            <h3>Car Rental System Website</h3>
+                            <!-- <p>Developed a straightforward car rental website that allows users to register, choose vehicles,
+                                make reservations, and complete payments securely.</p> -->
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <div class="project-content">
+                            <h3>Car Rental System Website</h3>
+                            <p>Oct 2023</p>
+                            <p>The Car Rental System is a PHP-based website that allows users to register, choose vehicles, make reservations, and complete secure payments. This system connects seamlessly to a MySQL database, enabling efficient back-end operations for car rental services.</p>
+                            <p><strong>Key Features:</strong></p>
+                            <ul>
+                                <li>User registration and secure payment system</li>
+                                <li>Vehicle selection with available options and rental prices</li>
+                                <li>Integrated with a MySQL database for managing reservations and user data</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-image">📧</div>
-                <div class="project-content">
-                    <h3>ANA - The Email Assistant</h3>
-                    <p>Created an AI-based email assistant designed for visually impaired users, integrated with
-                        Raspberry Pi. The system enables users to send emails through voice commands, eliminating the
-                        need for human assistance with typing.</p>
+
+            <!-- ANA - The Email Assistant Project -->
+            <div class="project-card" onclick="flipCard(this)">
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <div class="project-image">📧</div>
+                        <div class="project-content">
+                            <h3>ANA - The Email Assistant</h3>
+                            <!-- <p>Created an AI-based email assistant designed for visually impaired users, integrated with
+                                Raspberry Pi.</p> -->
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <div class="project-content">
+                            <h3>ANA - The Email Assistant</h3>
+                            <p>Dec 2022</p>
+                            <p>ANA is an innovative, AI-powered email assistant designed to assist visually impaired users by allowing them to compose, send, and manage emails through voice commands. Integrated with Raspberry Pi, the system eliminates the need for manual typing, providing a seamless and intuitive experience for users with disabilities.</p>
+                            <p><strong>Key Features:</strong></p>
+                            <ul>
+                                <li>Voice-enabled email composition and sending functionality</li>
+                                <li>Integration with Raspberry Pi for hardware and software synergy</li>
+                                <li>Simplified email management for visually impaired users</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -810,8 +929,28 @@
                 }
             });
         });
+
+        // Flip Card Functionality with Pop-Out Effect
+        function flipCard(card) {
+            // Flip the card
+            card.classList.toggle('flipped');
+
+            // Scale up the card when flipped
+            if (card.classList.contains('flipped')) {
+                card.style.zIndex = '10'; // Bring the flipped card to the front
+            } else {
+                card.style.zIndex = '1'; // Reset z-index when flipped back
+            }
+        }
+
+        // JARVIS Sound
+        const jarvisSound = document.getElementById('jarvis-sound');
+        window.addEventListener('load', () => {
+            jarvisSound.play().catch(() => {
+                console.log("Autoplay was blocked. Please interact with the page to play the sound.");
+            });
+        });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </body>
 
 </html>
