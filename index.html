@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaryan Chokshi | Jarvis-Themed Portfolio</title>
+    <title>Aaryan Chokshi Portfolio Website</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap"
         rel="stylesheet">
@@ -92,6 +92,11 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            /* Keep it on the right */
+            z-index: 1000;
         }
 
         .hamburger .line {
@@ -153,8 +158,12 @@
         }
 
         .hero-content {
-            max-width: 900px;
+            position: relative;
+            /* Ensure it stays above the canvas */
             z-index: 1;
+            /* Bring it to the front */
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .hero h1 {
@@ -497,7 +506,8 @@
         .dark-mode-toggle {
             position: fixed;
             top: 20px;
-            right: 20px;
+            right: 80px;
+            /* Move it left to avoid overlapping */
             z-index: 1000;
         }
 
