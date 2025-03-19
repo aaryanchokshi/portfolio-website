@@ -95,7 +95,6 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            /* Keep it on the right */
             z-index: 1000;
         }
 
@@ -151,6 +150,7 @@
             padding: 20px;
             position: relative;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
         body.light-mode .hero {
@@ -159,11 +159,10 @@
 
         .hero-content {
             position: relative;
-            /* Ensure it stays above the canvas */
             z-index: 1;
-            /* Bring it to the front */
             max-width: 900px;
             margin: 0 auto;
+            padding: 20px;
         }
 
         .hero h1 {
@@ -507,7 +506,6 @@
             position: fixed;
             top: 20px;
             right: 80px;
-            /* Move it left to avoid overlapping */
             z-index: 1000;
         }
 
@@ -601,7 +599,7 @@
             <a href="#contact" class="btn">Get in Touch</a>
         </div>
         <!-- 3D Background -->
-        <canvas id="threejs-background"></canvas>
+        <!-- <canvas id="threejs-background"></canvas> -->
     </section>
 
     <section id="about">
