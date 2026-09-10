@@ -115,13 +115,19 @@
       display: grid;
       place-items: center;
       border-radius: 12px;
-      font-family: "DM Mono", monospace;
-      font-size: .82rem;
-      background:
-        linear-gradient(135deg, rgba(142,162,255,.32), rgba(92,225,230,.12)),
-        rgba(255,255,255,.055);
+      overflow: hidden;
+      background: rgba(255,255,255,.055);
       border: 1px solid rgba(255,255,255,.16);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+      box-shadow: 0 8px 20px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.10);
+      flex-shrink: 0;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: 12px;
     }
 
     .brand-name { font-size: .94rem; }
@@ -581,7 +587,7 @@
   <div class="nav-wrap">
     <nav class="nav" aria-label="Primary navigation">
       <a class="brand" href="#top" aria-label="Aaryan Chokshi home">
-        <span class="brand-mark">AC</span>
+        <span class="brand-mark"><img src="ac-favicon.png" alt="AC logo" /></span>
         <span class="brand-name">Aaryan Chokshi</span>
       </a>
       <div class="nav-links" id="navLinks">
